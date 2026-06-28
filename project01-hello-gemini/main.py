@@ -15,15 +15,15 @@ elif not api_key.startswith("AQ."):
 else:
     print("Api key found!")
 
-message = """
- You are an expert JavaScript teacher.
-
- Explain closures with one real-world example and one coding example.
-"""
+system_prompt = "You are an expert ReactJS teacher"
+user_prompt = "explain useState in react"
 
 response = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents=message
+    contents=user_prompt,
+    config={
+        "system_instruction": system_prompt
+    }
 )
 
 print(response.text)
