@@ -1,12 +1,11 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+from utils.chat import chat
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
-client = genai.Client(
-    api_key = api_key
-)
+client = genai.Client(api_key=api_key)
 
 if not api_key:
     print("Please provide a valid api key")
@@ -15,15 +14,9 @@ elif not api_key.startswith("AQ."):
 else:
     print("Api key found!")
 
-system_prompt = "You are an expert ReactJS teacher"
-user_prompt = "explain useState in react"
+SYSTEM_PROMPT = "You are a helfull assistant, "
 
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents=user_prompt,
-    config={
-        "system_instruction": system_prompt
-    }
-)
-
-print(response.text)
+print(chat(client, "Hi, i'm amrit", SYSTEM_PROMPT)) 
+print()
+print(chat(client, "what's my name?", SYSTEM_PROMPT))
+print()
