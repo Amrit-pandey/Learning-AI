@@ -116,6 +116,11 @@ Opened the project folder directly in VS Code:
 
 project01-hello-gemini
 
+And check -> run command 
+which python
+it gives you to the exact path.
+then copy the path and press cmd+space+p then select python interpreter then you can see the list of interpreters and select .venev/bin/python. if not then press enter interpreter path and then paste the path that you have copied earlier and then press enter, That's it! 
+
 Selected the correct Python interpreter.
 
 After reloading VS Code, IntelliSense and package detection started working.
