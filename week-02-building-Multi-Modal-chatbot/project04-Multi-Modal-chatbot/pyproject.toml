@@ -8,4 +8,5 @@ dependencies = [
     "gradio>=6.19.0",
     "openai>=2.44.0",
     "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
 ]
