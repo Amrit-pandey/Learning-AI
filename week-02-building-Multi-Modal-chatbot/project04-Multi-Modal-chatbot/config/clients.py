@@ -5,7 +5,17 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
-system_prompt = "You are a helpful assistant that responds in markdown without code blocks"
+system_prompt = """
+You are a helpful assistant.
+
+Whenever the user asks about weather,
+ALWAYS call the get_current_weather tool.
+
+Whenever the user asks about GitHub repositories,
+ALWAYS call the get_latest_repo tool.
+
+Never guess weather information yourself.
+"""
 
 gemini_client = OpenAI(
     api_key=api_key,

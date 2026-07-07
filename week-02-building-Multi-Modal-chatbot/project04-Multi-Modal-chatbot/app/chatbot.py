@@ -26,14 +26,19 @@ def chat(message, history):
             "content": message
         }
     )
-    response = ollama_client.chat.completions.create(model="llama3.2:1b", messages=messages, tools=TOOLS)
+    print("=" * 50)
+    print("Gemini URL:", gemini_client.base_url)
+    print("Ollama URL:", ollama_client.base_url)
+    print("=" * 50)
+    print("Using Gemini")
+    response = ollama_client.chat.completions.create(model="qwen2.5:7b", messages=messages, tools=TOOLS)
     # response = ""
     # for chunk in response:
     #     if chunk.choices[0].delta.content:
     #         response +=chunk.choices[0].delta.content
     #     yield response
     print(type(response))
-    print(response)
+    print(response.model)
     print(response.model_dump())
     message = response.choices[0].message
     print(message)
@@ -52,7 +57,7 @@ def chat(message, history):
         })
 
         final = ollama_client.chat.completions.create(
-        model="llama3.2:1b",
+        model="qwen2.5:7b",
         messages=messages
         )
         return final.choices[0].message.content

@@ -15,3 +15,21 @@ github_tool = {
         }
     }
 }
+
+weather_tool = {
+    "type": "function",
+    "function": {
+        "name": "get_current_weather",
+        "description": "Get the current weather of any city. Use this tool whenever the user asks about weather, temperature, humidity, rain or forecast.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "Name of the city"
+                }
+            },
+            "required": ["city"]
+        }
+    }
+}
