@@ -6,4 +6,4 @@ This repository contains my AI Engineering learning journey.
 
 - Project 01 - Hello Gemini 
 - Project 02 - Sales brochure generator
-- Project 03 - Coming Soon
+- Project 03 - Multi model chatbot
