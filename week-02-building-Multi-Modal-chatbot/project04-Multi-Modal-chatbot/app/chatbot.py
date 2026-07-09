@@ -26,29 +26,21 @@ def chat(message, history):
             "content": message
         }
     )
-    print("=" * 50)
-    print("Gemini URL:", gemini_client.base_url)
-    print("Ollama URL:", ollama_client.base_url)
-    print("=" * 50)
-    print("Using Gemini")
-    response = ollama_client.chat.completions.create(model="qwen2.5:7b", messages=messages, tools=TOOLS)
-    # response = ""
-    # for chunk in response:
-    #     if chunk.choices[0].delta.content:
-    #         response +=chunk.choices[0].delta.content
-    #     yield response
-    print(type(response))
-    print(response.model)
-    print(response.model_dump())
+    response = ollama_client.chat.completions.create(
+        model="qwen2.5:7b", 
+        messages=messages, 
+        tools=TOOLS, 
+        stream=False
+    )
     message = response.choices[0].message
-    print(message)
+    # this is not the right approach to call tools and streaming together
+    # Later i'll find the correct approach and implememt this
     if message.tool_calls:
         messages.append(message)
         tool_call = message.tool_calls[0]
         tool_name = tool_call.function.name
         arguments = json.loads(tool_call.function.arguments)
         result = execute_tools(tool_name, arguments)
-        print(result)
     
         messages.append({
             "role": "tool",
@@ -61,4 +53,15 @@ def chat(message, history):
         messages=messages
         )
         return final.choices[0].message.content
+    else:
+        response = ollama_client.chat.completions.create(
+            model="qwen2.5:7b", 
+            messages=messages,
+            stream=True
+        )
+        stream = ""
+        for chunk in response:
+            if chunk.choices[0].delta.content:
+                stream +=chunk.choices[0].delta.content
+            yield stream
     return message.content
