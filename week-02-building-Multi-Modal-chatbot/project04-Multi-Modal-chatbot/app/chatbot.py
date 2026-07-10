@@ -37,6 +37,8 @@ def chat(message, history):
     # Later i'll find the correct approach and implememt this
     if message.tool_calls:
         messages.append(message)
+        print("Tool Calls:", message.tool_calls)
+        print("Content:", message.content)
         tool_call = message.tool_calls[0]
         tool_name = tool_call.function.name
         arguments = json.loads(tool_call.function.arguments)
@@ -52,7 +54,8 @@ def chat(message, history):
         model="qwen2.5:7b",
         messages=messages
         )
-        return final.choices[0].message.content
+        yield final.choices[0].message.content
+        return
     else:
         response = ollama_client.chat.completions.create(
             model="qwen2.5:7b", 

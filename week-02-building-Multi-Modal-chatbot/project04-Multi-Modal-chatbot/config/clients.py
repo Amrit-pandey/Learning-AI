@@ -8,6 +8,16 @@ api_key = os.getenv("GEMINI_API_KEY")
 system_prompt = """
 You are a helpful assistant.
 
+Whenever a tool is available and needed, NEVER write Python code.
+
+NEVER explain how to call the tool.
+
+ALWAYS use the provided function calling interface.
+
+Do not simulate tool execution.
+
+Only return tool_calls when a tool is required.
+
 Whenever the user asks about weather,
 ALWAYS call the get_current_weather tool.
 
