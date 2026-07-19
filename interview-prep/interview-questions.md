@@ -221,3 +221,14 @@ Answer: RAG stands for Retrieval-Augmented Generation. It is a technique used to
 Q30. difference between Auto encoding vs auto regressive LLMs?
 
 Answer: "Think of Autoencoding models (like BERT) as excellent readers because they look at the whole sentence at once to understand meaning. Think of Autoregressive models (like GPT) as excellent writers because they generate text one word at a time, moving forward."
+
+Q31. what are vectors?
+
+Answer: It's a string of numbers that acts like a GPS coordinate for an idea. It allows computers to see how close or far apart different concepts are."
+
+Q32. what are vector embedding 
+
+Answer: Think of "Embedding" as the translator. It takes things humans understand (words, sentences, images, audio) and embeds (plugs) them into a mathematical space so a computer can understand them.
+
+** Why is it called "Embedding"?
+It’s called an embedding because you are taking a discrete object (like the word "cat") and embedding it into a continuous mathematical space (a line, a grid, or a multi-dimensional cloud of data).
