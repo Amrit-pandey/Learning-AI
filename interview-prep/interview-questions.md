@@ -6,25 +6,20 @@ Answer: LLM stands for Large Language Model. It is a neural network trained on m
 Internal LifeCycle of LLMs ---->>>
 
 1. Tokenization (Translating Text to Numbers)
-Computers don't understand words; they understand numbers. Your input prompt is instantly chopped up into tokens (words or sub-words). Each token is mapped to a specific integer ID based on the model's pre-defined vocabulary dictionary.  Example: The word "unbelievable" might get split into ["un", "believ", "able"] --> [324, 8912, 451].
+The input text is first broken into tokens. A token may represent a whole word, part of a word, punctuation, or even a single character depending on the tokenizer. Neural networks don't understand raw text, so everything must first be converted into tokens. Each token is mapped to a specific integer ID based on the model's pre-defined vocabulary dictionary.  Example: The word "unbelievable" might get split into ["un", "believ", "able"] --> [324, 8912, 451].
 
 2. Vector Embedding & Positional Encoding (Mapping Meaning and Order)
-    ** Token Embedding: Each token is converted into a high-dimensional vector (a long list of numbers, e.g., 4,096 dimensions).   Proximity in this vector space represents mathematical similarity (e.g., "king" and "queen" will sit close together).
-
-    ** Positional Encoding: Because Transformers process all tokens simultaneously (in parallel), they have no native sense of word order. A mathematical "wave" (sine/cosine function or rotational embedding like RoPE) is added to the token vectors so the model knows where each word sits in the sentence.
+    Each token is converted into a dense embedding vector. Since Transformers process tokens in parallel, positional encoding is added so the model understands the order of tokens.
 
 3. The Transformer Blocks (The Processing Engine)
 The vectors are passed through multiple stacked Transformer Layers (often 32 to 96 layers deep). Each layer contains two primary engines:  
-       ** Self-Attention Mechanism (The Information Router): This is the crown jewel of LLMs. Every token calculates a Query (Q), a Key (K), and a Value (V) vector. By computing the dot-product between Queries and Keys ($Q \times K^T$), the model determines how much "attention" a word should pay to every other word in the prompt. This dynamically updates the token's vector with contextual meaning (e.g., deciding if the word "bank" means a riverbank or a financial bank based on surrounding words).
-
-       ** Feed-Forward Network / MLP (The Fact Refiner): After attention routes information between tokens, an independent neural network processes each token individually to compute higher-level abstractions and pull learned facts from the model's internal memory (weights).  
+       The embeddings pass through multiple Transformer blocks. Each block contains Multi-Head Self-Attention and Feed-Forward Neural Networks. Self-attention allows each token to understand its relationship with every other token in the sequence, building contextual meaning. 
 
 4. The Softmax Layer (Calculating the Probabilities)
 After passing through the final Transformer layer, the processed vectors are converted back into a list of raw scores—called Logits—for every single possible word in the model's vocabulary.
 
 5. Autoregressive Loop (The Generation)
-The system samples a token from that distribution based on your Temperature setting (low temperature picks the safest $72\%$ token; high temperature introduces randomness).
-The chosen token is appended to the original prompt, and the entire lifecycle repeats from step 1 to predict the next token. This loop continues until the model outputs a special "End of Text" (EOS) token.
+The model selects the next token using a decoding strategy such as greedy decoding, sampling, or temperature-based sampling. The predicted token is appended to the input, and the entire process repeats until an End-of-Sequence (EOS) token or the maximum token limit is reached.
 
 **Q2. Why are they called Large Language Models?**
 
