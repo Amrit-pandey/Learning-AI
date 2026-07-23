@@ -231,3 +231,49 @@ It’s called an embedding because you are taking a discrete object (like the wo
 **Q33.How does RAG work internally?**
 
 Answer: RAG works in two phases. The first phase is indexing, where documents are split into chunks, converted into embeddings, and stored in a vector database. The second phase is retrieval. When a user asks a question, the query is converted into an embedding, the vector database performs similarity search to retrieve the top-k most relevant chunks, and those chunks are provided to the LLM as context. Finally, the LLM generates the answer using the retrieved information instead of relying only on its internal knowledge.
+
+                                                ONE TIME
+
+                                        PDF / Documents
+                                                │
+                                                ▼
+                                        Chunking
+                                                │
+                                                ▼
+                                        Embedding Model
+                                                │
+                                                ▼
+                                        Vector Embeddings
+                                                │
+                                                ▼
+                                        Chroma Vector DB
+                                ═══════════════════════════════════════════════
+
+                                        EVERY USER QUERY
+
+                                User Question
+                                │
+                                ▼
+                                Embedding Model
+                                │
+                                ▼
+                                Question Vector
+                                │
+                                ▼
+                                Similarity Search
+                                │
+                                ▼
+                                Top 6 Chunks
+                                │
+                                ▼
+                                System Prompt
+                                +
+                                Retrieved Context
+                                +
+                                User Question
+                                │
+                                ▼
+                                LLM
+                                │
+                                ▼
+                                Final Answer
