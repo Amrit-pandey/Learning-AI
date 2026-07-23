@@ -217,13 +217,17 @@ Answer: RAG stands for Retrieval-Augmented Generation. It is a technique used to
 
 Answer: "Think of Autoencoding models (like BERT) as excellent readers because they look at the whole sentence at once to understand meaning. Think of Autoregressive models (like GPT) as excellent writers because they generate text one word at a time, moving forward."
 
-**Q31. what are vectors?**
+**Q31. what are vectors and why do we need?**
 
-Answer: It's a string of numbers that acts like a GPS coordinate for an idea. It allows computers to see how close or far apart different concepts are."
+Answer:A vector is a list of numbers that represents the meaning of a piece of data. that acts like a GPS coordinate for an idea. It allows computers to see how close or far apart different concepts are." we need Because computers cannot understand the meaning of text directly. By converting text into vectors, we can mathematically compare meanings using distance or similarity measures, which powers semantic search, recommendations, clustering, and RAG systems.
 
 **Q32. what are vector embedding**
 
-Answer: Think of "Embedding" as the translator. It takes things humans understand (words, sentences, images, audio) and embeds (plugs) them into a mathematical space so a computer can understand them.
+Answer: Think of "Embedding" as the translator. An embedding model converts human-understandable data into vector embeddings.(words, sentences, images, audio) and embeds (plugs) them into a mathematical space so a computer can understand them.
 
 **** Why is it called "Embedding"?**
 It’s called an embedding because you are taking a discrete object (like the word "cat") and embedding it into a continuous mathematical space (a line, a grid, or a multi-dimensional cloud of data).
+
+**Q33.How does RAG work internally?**
+
+Answer: RAG works in two phases. The first phase is indexing, where documents are split into chunks, converted into embeddings, and stored in a vector database. The second phase is retrieval. When a user asks a question, the query is converted into an embedding, the vector database performs similarity search to retrieve the top-k most relevant chunks, and those chunks are provided to the LLM as context. Finally, the LLM generates the answer using the retrieved information instead of relying only on its internal knowledge.
